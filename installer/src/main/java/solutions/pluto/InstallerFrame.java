@@ -1,6 +1,7 @@
 package solutions.pluto;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -12,12 +13,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class InstallerFrame extends JFrame
 {
     public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-    public static final int HEIGHT = 300, WIDTH = 600;
+    public static final int HEIGHT = 325, WIDTH = 600;
     public static final Font FONT = new Font( "Verdana", 0, 15 );
 
     public InstallerFrame()
@@ -41,6 +44,12 @@ public class InstallerFrame extends JFrame
         installButton.setFocusPainted( false );
         installButton.setFont( FONT );
         this.add( installButton );
+
+        JButton uninstall = new JButton( "Uninstall" );
+        uninstall.setBounds( 5, 250, 570, 30 );
+        uninstall.setFocusPainted( false );
+        uninstall.setFont( FONT );
+        this.add( uninstall );
 
         JLabel gamePathLabel = new JLabel( "Game path:" );
         gamePathLabel.setBounds( 5, 20, 100, 25 );
@@ -106,6 +115,97 @@ public class InstallerFrame extends JFrame
                 }
             }
         } );
+
+        uninstall.addActionListener( e-> {
+            if ( mcProfile.getSelectedItem() == null || mcProfile.getSelectedItem().toString().isEmpty() )
+            {
+                Utils.showError( "Select the actual profile first", false );
+                return;
+            }
+            File key = new File( System.getProperty( "user.home" ) + "\\Future\\auth_key" );
+            if (key.exists()) {
+                try {
+                    key.delete();
+                } catch (Exception ex) {
+                    Utils.showError("Failed to delete the auth key", false);
+                }
+            }
+
+            JsonObject profiles = Utils.getProfiles();
+            if (profiles == null) return;
+            profiles.get( "profiles" ).getAsJsonObject().asMap().forEach( ( k, v ) ->
+            {
+                String name = v.getAsJsonObject().get("name").getAsString();
+                if (!name.equals(mcProfile.getSelectedItem()))
+                    return;
+                File verFolder = new File(new File(Utils.getPath(), "versions"),
+                        v.getAsJsonObject().get("lastVersionId").getAsString());
+                File json = new File(verFolder, verFolder.getName() + ".json");
+                JsonObject verConfig = null;
+
+                try
+                {
+                    if ( !json.exists() ) throw new IOException();
+                    verConfig = JsonParser.parseReader( new FileReader( json ) ).getAsJsonObject();
+                } catch ( Exception ex )
+                {
+                    Utils.showError( "Failed to read a version json config", false );
+                    return;
+                }
+
+                final String mcArgs = "minecraftArguments";
+                String minecraftArguments = verConfig.get( mcArgs )
+                        .getAsString()
+                        .replace(" --tweakClass com.example.tweaker.ILOVEFUTURECLIENT", "")
+                        .replace(" --tweakClass net.futureclient.loader.launch.launchwrapper.LaunchWrapperEntryPoint", "");
+                verConfig.remove( mcArgs );
+                verConfig.addProperty( mcArgs, minecraftArguments );
+
+                final String[] libs = { "net.futureclient:loader:1.0", "com.example:tweaker:1.0" };
+                List<JsonElement> toRemove = new ArrayList<>();
+                for (JsonElement obj : verConfig.get( "libraries" ).getAsJsonArray()) {
+                    if (obj.isJsonObject()) {
+                        for (String lib : libs) {
+                            if (obj.getAsJsonObject().has("name") && obj.getAsJsonObject().get("name").getAsString().equals(lib)) {
+                                toRemove.add(obj);
+                            }
+                        }
+                    }
+                }
+                for (JsonElement element : toRemove) {
+                    verConfig.get("libraries").getAsJsonArray().remove(element);
+                }
+
+                try
+                {
+                    Files.write( json.toPath(), new GsonBuilder().setPrettyPrinting().create().toJson( verConfig ).getBytes( StandardCharsets.UTF_8 ) );
+                } catch ( IOException ex )
+                {
+                    Utils.showError( "Failed to write the JSON config for a version", false );
+                }
+
+                File libFolder = new File( Utils.getPath(), "libraries" );
+                final String[] files = { "net/futureclient/loader-1.0.jar", "com/example/tweaker-1.0.jar" };
+                for ( String file : files )
+                {
+                    File dir = new File( libFolder, file.replace( "-", "/" )
+                            .replace( ":", "/" ).replace( ".jar", "" ) );
+                    File file1 = new File( dir, file.substring( file.lastIndexOf( '/' ) + 1 ) );
+                    if (file1.exists())
+                    {
+                        try {
+                            file1.delete();
+                        } catch (Exception ex) {
+                            Utils.showError( "Failed to delete " + file1.getName(), false );
+                        }
+                    }
+                }
+            });
+
+            JOptionPane.showMessageDialog( this, "Successfully uninstalled Future+ GOLD 2.13.5!", Bootstrap.TITLE, JOptionPane.INFORMATION_MESSAGE );
+
+        } );
+
         installButton.addActionListener( e ->
         {
             if ( mcProfile.getSelectedItem() == null || mcProfile.getSelectedItem().toString().isEmpty() )
