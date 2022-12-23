@@ -153,11 +153,6 @@ public class InstallerFrame extends JFrame
                     return;
                 }
 
-                if (verConfig == null) {
-                    Utils.showError( "Failed to parse/read a version json config", false );
-                    return;
-                }
-
                 final String mcArgs = "minecraftArguments";
                 String minecraftArguments = verConfig.get( mcArgs )
                         .getAsString()
