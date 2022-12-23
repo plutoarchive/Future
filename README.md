@@ -43,7 +43,8 @@ Not only that, but Future got worse over time. 0x22 started pasting features fro
 2. Install loader-1.0.jar by following [this video](https://youtu.be/-4XayCqZI1g?t=36) (after clicking edit paste stuff from future.json)
 3. Do the same for tweaker-1.0.jar but after clicking edit paste stuff from tweaker.json
 4. Make sure the tweaker comes before the loader ([like this](https://crystalpvp.ru/future/multimc.png))
-5. Run the game
+5. Put auth_key into your %username%/Future folder (on windows it's C:/Users/%username%/Future/auth_key)
+6. Run the game
 
 <div align="center">
   
