@@ -11,7 +11,7 @@
   
 mirrors:
   
-[yougame.biz](https://todo.com) / [crystalpvp.ru](https://crystalpvp.ru/future) / [cattyn.dev](https://cattyn.dev/future)
+[yougame.biz](https://yougame.biz/threads/277616) / [crystalpvp.ru](https://crystalpvp.ru/future) / [cattyn.dev](https://cattyn.dev/future)
 
 [plutosolutions telegram](https://t.me/plutosolutions)
   
