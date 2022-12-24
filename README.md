@@ -30,7 +30,7 @@ Not only that, but Future got worse over time. 0x22 started pasting features fro
 
 ## Official launcher
 
-1. Download the installer from the [releases page](https://github.com/PlutoSolutions/Future/releases)
+1. Download the crack installer from the [releases page](https://github.com/PlutoSolutions/Future/releases)
 2. Run it with `java -jar Installer.jar` or by double-clicking it
 3. Select your game path if it wasn't detected automatically
 4. Select the minecraft profile to install Future into (profile should have a version with Forge installed)
@@ -45,6 +45,16 @@ Not only that, but Future got worse over time. 0x22 started pasting features fro
 4. Make sure the tweaker comes before the loader ([like this](https://crystalpvp.ru/future/multimc.png))
 5. Put auth_key into your %username%/Future folder (on windows it's C:/Users/%username%/Future/auth_key)
 6. Run the game
+
+## TL Legacy
+1. Open the launcher and check your game directory ([look here](https://crystalpvp.ru/future/tlenglish.png))
+2. Download the official 1.12.2 Forge installer ([from here](https://maven.minecraftforge.net/net/minecraftforge/forge/1.12.2-14.23.5.2859/forge-1.12.2-14.23.5.2859-installer.jar)) and run it
+3. In that installer make sure the game directory is the same as the launcher one, press OK
+4. Download the crack installer from the [releases page](https://github.com/PlutoSolutions/Future/releases)
+5. Run it with `java -jar Installer.jar` or by double-clicking it, make sure the game path is set to the launcher path and choose the `forge` profile
+6. Click checkboxes if you need baritone or optifine installed
+7. Click install
+8. Open the launcher, find game version "1.12.2-forge-14.23.5.2859" and run it
 
 <div align="center">
   
