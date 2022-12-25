@@ -54,7 +54,7 @@ Not only that, but Future got worse over time. 0x22 started pasting features fro
 5. Run it with `java -jar Installer.jar` or by double-clicking it, make sure the game path is set to the launcher path and choose the `forge` profile
 6. Click checkboxes if you need baritone or optifine installed
 7. Click install
-8. Open the launcher, find game version "1.12.2-forge-14.23.5.2859" and run it
+8. Open the launcher, turn off "Ely.by skins" in the settings ([here](https://crystalpvp.ru/future/tl2english.png)), find game version "1.12.2-forge-14.23.5.2859" and run it
 
 <div align="center">
   
