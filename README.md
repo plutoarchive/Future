@@ -30,7 +30,7 @@ Not only that, but Future got worse over time. 0x22 started pasting features fro
 
 ## Official launcher
 
-1. Download the crack installer from the [releases page](https://github.com/PlutoSolutions/Future/releases)
+1. Download the crack installer from the [pluto site](https://crystalpvp.ru/future/Installer.jar)
 2. Run it with `java -jar Installer.jar` or by double-clicking it
 3. Select your game path if it wasn't detected automatically
 4. Select the minecraft profile to install Future into (profile should have a version with Forge installed)
@@ -39,7 +39,7 @@ Not only that, but Future got worse over time. 0x22 started pasting features fro
 7. Run the game
 
 ## MultiMC
-1. Download the crack package from the [releases page](https://github.com/PlutoSolutions/Future/releases)
+1. Download the crack package from the [site](https://crystalpvp.ru/future/package.zip)
 2. Install loader-1.0.jar by following [this video](https://youtu.be/-4XayCqZI1g?t=36) (after clicking edit paste stuff from future.json)
 3. Do the same for tweaker-1.0.jar but after clicking edit paste stuff from tweaker.json
 4. Make sure the tweaker comes before the loader ([like this](https://crystalpvp.ru/future/multimc.png))
